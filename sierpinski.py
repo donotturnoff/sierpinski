@@ -1,7 +1,7 @@
 import turtle
 import math
 
-def bottom_up(origin, length):
+def top_down(origin, length):
     if length > 2:
         t.up()
         t.goto(origin)
@@ -9,24 +9,24 @@ def bottom_up(origin, length):
         for i in range(3):
             t.fd(length)
             t.left(120)
-        bottom_up(origin, length/2)
-        bottom_up((origin[0] + length/2, origin[1]), length/2)
-        bottom_up((origin[0] + length/4, origin[1] + math.sqrt( ( (length/2) ** 2 )-( ( length/4) ** 2 ) )), length/2)
+        top_down(origin, length/2)
+        top_down((origin[0] + length/2, origin[1]), length/2)
+        top_down((origin[0] + length/4, origin[1] + math.sqrt( ( (length/2) ** 2 )-( ( length/4) ** 2 ) )), length/2)
 
-def top_down(length, depth):
+def bottom_up(length, depth):
     if depth == 0:
         for i in range(0,3):
             t.fd(length)
             t.left(120)
     else:
-        top_down(length/2,depth-1)
+        bottom_up(length/2,depth-1)
         t.fd(length/2)
-        top_down(length/2,depth-1)
+        bottom_up(length/2,depth-1)
         t.bk(length/2)
         t.left(60)
         t.fd(length/2)
         t.right(60)
-        top_down(length/2,depth-1)
+        bottom_up(length/2,depth-1)
         t.left(60)
         t.bk(length/2)
         t.right(60)
